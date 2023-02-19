@@ -1,12 +1,11 @@
 from input import read_from_stdin
 from input import read_from_file
-from gauss_calculation import count_matrix_det_by_gauss, count_result, print_matrix
+from gauss_calculation import count_result, print_matrix
 from gauss_calculation import count_matrix_det
 from gauss_calculation import count_residual_vector
 from gauss_calculation import validate_matrix
 from gauss_calculation import print_matrix
-from gauss_calculation import triangulize_matrix
-from gauss_calculation import count_matrix_det_by_gauss
+from gauss_calculation import triangulize_matrix, count_matrix_det
 import numpy as np
 
 response = input("Read data from file? (y/n)")
