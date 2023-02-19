@@ -21,8 +21,7 @@ elif (response == "y"):
 validate_matrix(matrix)
 
 det = count_matrix_det([line[:-1] for line in matrix])
-det_gauss = count_matrix_det_by_gauss(matrix.copy())
-print(f"Matrix det:{round(det, 3)}, det_gauss:{round(det_gauss, 3)}")
+print(f"Matrix det:{round(det, 3)}")
 
 triangle_matrix = triangulize_matrix(matrix.copy())
 print(f"Triangle matrix:")
