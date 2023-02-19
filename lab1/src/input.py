@@ -1,18 +1,22 @@
 from sys import stdin
 
 def read_from_stdin():
-    
-    print("Type coefficient matrix with colums devided by whitspace and rows by \"\\n\"")
+    print("Type coefficient matrix with columns divided by whitespace and rows by \"\\n\"")
     matrix = []
 
-    for line in stdin:
-        if line == '' or line == 'end\n':
-            break
-        data = line.strip().split(" ")
-        data = [float(i) for i in data]
-
-        matrix.append(data)
-
+    try:
+        while True:
+            line = input()
+            if line == '':
+                break
+            data = line.strip().split(" ")
+            data = [float(i) for i in data]
+            matrix.append(data)
+    except EOFError:
+        pass
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
 
     return matrix
 
