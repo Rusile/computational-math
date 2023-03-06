@@ -17,9 +17,16 @@ import sympy as sp
 
 is_system = get_system()
 
-f, g = read_system_console() if is_system else None
+eq, f, g = None, None, None
+
+try:
+    f, g = read_system_console() if is_system else None
+except Exception:
+    pass
 
 eq = read_equation_console() if not is_system else None
+
+root_x, root_y, root = None, None, None
 
 start_x, stop_x = read_interval_console('x')
 if is_system:
@@ -39,18 +46,19 @@ match read_method():
     case 4:
         root_x, root_y, count = find_root_simple_iteration_double(f, g, start_x, start_y, stop_x, stop_y, epsilon)
 
-        if root_x == None or root_y == None: print("Invalide interval and equation for simple iteration calculation method")
-        root = None
+        if root_x == None or root_y == None: print(
+            "Invalide interval and equation for simple iteration calculation method")
     case _:
         print("Error with choosing method!")
 
-if root != None:
+if eq is not None:
     print(f"root={root} in [{start_x}, {stop_x}]")
     plt.plot([i for i in np.arange(start_x, stop_x, 0.01)], [eq(i) for i in np.arange(start_x, stop_x, 0.01)])
-    plt.plot(root, eq(root), 'o')
+    if root != None:
+        plt.plot(root, eq(root), 'o')
     plt.title(f"Root in [{start_x},{stop_x}]")
     plt.show()
-elif root_x != None and root_y != None:
+elif f is not None and g is not None:
     f = sp.lambdify(sp.symbols('x y'), f, 'numpy')
     g = sp.lambdify(sp.symbols('x y'), g, 'numpy')
 
@@ -74,11 +82,11 @@ elif root_x != None and root_y != None:
     # Plot for the first function
     ax1 = fig.add_subplot(1, 2, 1, projection='3d')
     ax1.plot_surface(X, Y, Z1, cmap='jet', alpha=0.8)
-    ax1.scatter(root_x, root_y, root_z, s=50, c='red', label='root')
+    if root_x is not None and root_y is not None:
+        ax1.scatter(root_x, root_y, root_z, s=50, c='red', label='root')
     ax1.set_xlabel('x')
     ax1.set_ylabel('y')
     ax1.set_zlabel('z')
-    ax1.set_title('x^2 + y^2')
 
     # Plot for the second function
     ax1.plot_surface(X, Y, Z2, cmap='jet', alpha=0.8)
