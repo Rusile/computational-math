@@ -20,13 +20,17 @@ def read_system_console():
 
     match int(input()):
         case 1:
-            f = x ** 2 + x + 0.2 * y ** 2 - 0.3
+            f = x + 0.2 * y ** 2 - 0.3
             g = x ** 2 + y - 5 * x * y - 0.7
-            return f, g
+
         case 2:
             f = 0.1 * x ** 2 + x + 0.2 * y ** 2 - 0.3
             g = 0.2 * x ** 2 + y - 0.1 * x * y - 0.7
-            return f, g
+
+        case _:
+            f = x ** 2 + x + 0.2 * y ** 2 - 0.3
+            g = x ** 2 + y - 5 * x * y - 0.7
+    return f, g
 
 def read_equation_console():
     print("Choose one of five equations:")
@@ -35,10 +39,6 @@ def read_equation_console():
     print("3 -------- x^3 - 2")
     print("4 -------- x^2 - 1")
     print("5 -------- -x^2 - 3*x + 3")
-    print("6 -------- x^2 + x + 0.2 * y^2 - 0.3")
-    print("  -------- x^2 + y - 5 * x * y - 0.7")
-    print("7 -------- 0.1 * x^2 + x + 0.2 * y^2 - 0.3")
-    print("  -------- 0.2 * x^2 + y - 0.1 * x * y - 0.7")
     x, y = symbols('x y')
 
     match int(input()):

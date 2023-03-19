@@ -2,8 +2,6 @@ import sys
 
 from numpy import multiply
 
-# TODO:clean up prints
-
 def validate_matrix(matrix):
 
     if(matrix == []):
@@ -62,7 +60,7 @@ def count_result(matrix):
             for k in range(i, n + 1):
                 matrix[j_before_i][k] = matrix[j_before_i][k] - matrix[i][k]*i_head
 
-    return [round(matrix[i][n], 3) for i in range(0, len(matrix))]
+    return [round(matrix[i][n], 100) for i in range(0, len(matrix))]
 
 
 def count_matrix_det(matrix):

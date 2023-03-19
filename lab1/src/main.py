@@ -1,7 +1,6 @@
 from input import read_from_stdin
 from input import read_from_file
 from gauss_calculation import count_result, print_matrix
-from gauss_calculation import count_matrix_det
 from gauss_calculation import count_residual_vector
 from gauss_calculation import validate_matrix
 from gauss_calculation import print_matrix
@@ -23,8 +22,9 @@ det = count_matrix_det([line[:-1] for line in matrix])
 print(f"Matrix det:{round(det, 3)}")
 
 triangle_matrix = triangulize_matrix(matrix.copy())
+
 print(f"Triangle matrix:")
-print_matrix("triangle matrix", [[round(value, 3) for value in line] for line in triangle_matrix])
+print_matrix("triangle matrix", [[round(value, 6) for value in line] for line in triangle_matrix])
 
 solution = count_result(matrix.copy())
 print(f"Matrix solution:{solution}")

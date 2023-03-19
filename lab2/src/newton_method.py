@@ -28,7 +28,6 @@ def check_interval(equation, start, stop):
     start_derivative_fst = derivative(equation, start, n=1)
     start_derivative_snd = derivative(equation, start, n=2)
 
-    # points = [round(x * 0.01, 1) for x in range(start, stop)]
     for i in np.arange(start, stop, 0.01):
         if not ((start_derivative_fst * derivative(equation, i, n=1) > 0)
                 and (start_derivative_snd * derivative(equation, i, n=2) >= 0)):
