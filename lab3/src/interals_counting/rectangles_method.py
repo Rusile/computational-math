@@ -3,6 +3,7 @@ from scipy.misc import derivative
 import numpy as np
 from interals_counting.abstract_integral_rune_check import count_abstract_integral_rune_check
 
+
 def calculate_integral_rectangles_method(f, a, b, e):
     result_start, num_of_intervals_start = count_integral_start(f, a, b, e)
     result_middle, num_of_intervals_middle = count_integral_middle(f, a, b, e)
@@ -13,28 +14,27 @@ def calculate_integral_rectangles_method(f, a, b, e):
 
 
 def count_integral_start(f, a, b, e):
-    result_start = lambda h : sum([f(i) for i in np.arange(a, b - h, h)]) * h
+    result_start = lambda h: sum([f(i) for i in np.arange(a, b - h, h)]) * h
     return count_abstract_integral_rune_check(result_start, a, b, e * 3)
 
 
 def count_integral_middle(f, a, b, e):
-    result_start = lambda h : sum([f(i) for i in np.arange(a + h/2, b, h)]) * h
+    result_start = lambda h: sum([f(i) for i in np.arange(a + h / 2, b, h)]) * h
     return count_abstract_integral_rune_check(result_start, a, b, e * 3)
 
 
 def count_integral_stop(f, a, b, e):
-    result_start = lambda h : sum([f(i) for i in np.arange(a + h, b, h)]) * h
+    result_start = lambda h: sum([f(i) for i in np.arange(a + h, b, h)]) * h
     return count_abstract_integral_rune_check(result_start, a, b, e * 3)
 
-#count accuracy by 2nd derivative
 
 def count_num_of_intervals(f, a, b, e):
-    return math.sqrt(find_max_snd_derivative(f, a, b)*(b - a)**3/(12*e))
+    return math.sqrt(find_max_snd_derivative(f, a, b) * (b - a) ** 3 / (12 * e))
 
 
-def find_max_snd_derivative(f,a, b):
+def find_max_snd_derivative(f, a, b):
     max = derivative(f, a, n=2)
     for i in np.arange(a, b, 0.01):
-        if(derivative(f, i, n=2) > max):
+        if (derivative(f, i, n=2) > max):
             max = derivative(f, i, n=2)
     return round(max) + 1
