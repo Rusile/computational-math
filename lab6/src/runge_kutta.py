@@ -14,9 +14,7 @@ def runge_kutta(x0, y0, xf, h, f):
     return y0
 
 def runge_kutta_differentiation(f, initial_conditions, h, bounds, e):
-    # print("_____________________ RUNGE-KUTA _____________________________")
-    n = ceil((bounds[1] - bounds[0])/ h) + 1 # здесь добавляется 1, чтобы количество точек было правильным (у k интервалов k+1 конец)
-    # print(f"bounds=[{bounds[0]}, {bounds[1]}], diff={bounds[1]-bounds[0]}, h={h}, n={n}")
+    n = ceil((bounds[1] - bounds[0])/ h) + 1
     # для этих иксов нужно предсказать значение y
     x = [bounds[0] + h*i for i in range(n)]
     y = [0]*(n)
@@ -43,7 +41,6 @@ def do_iteration(h0, a, b, y0, f, e):
     h0 /= 2
     y2 = runge_kutta(a, y0, b, h0/2, f)
     R = abs(y1 - y2) / (2**(-fexp(e)) - 1)
-    # print(f"{h0}\t\t{round(y1, 3)}\t\t{round(y2, 3)}\t\t{round(R)}\t\t{e}")
     return y2, R, h0
 
 def fexp(number):

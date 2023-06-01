@@ -1,20 +1,17 @@
 from runge_kutta import runge_kutta_differentiation
 from math import ceil
 import numpy as np
-import pandas as pd
+# import pandas as pd
 
 def miln_differentiation(f, initial_conditions, h, bounds, accuracy):
-    # print("_____________________ MILAN _____________________________")
-    n = ceil((bounds[1] - bounds[0]) / h) + 1 # здесь добавляется 1, чтобы количество точек было правильным (у k интервалов k+1 конец)
+    n = ceil((bounds[1] - bounds[0]) / h) + 1
     if (n < 4):
-        # print("For Milan differentiation num of intervals has to be at least 4!")
-        # print(f"h = {h}, on  ({bounds[0]}, {bounds[1]}), n = ceil((bounds[1] - bounds[0])/ h) + 1 = {n}")
+        print("For Milan differentiation num of intervals has to be at least 4!")
         exit(0)
 
     # для этих иксов нужно предсказать значение y
     x = [bounds[0] + h*i for i in range(n)]
-    # y = [0]*(n)
-    y = []
+    y = [0]*(n)
 
 
     # Вычисляем первые 4 значения y
@@ -25,14 +22,12 @@ def miln_differentiation(f, initial_conditions, h, bounds, accuracy):
     for i in range(4, n):
         y_prediction = prediction(h, f, x, y, i)
         y_correction = correction(h, f, x, y, i, y_prediction)
-        # print(f"{round(y_prediction, 6)}\t\t{round(y_correction, 6)}\t\t{round(abs(y_correction - y_prediction), 3)}\t\t{accuracy}")
 
         while abs(y_correction - y_prediction) > accuracy:
             y_prediction = y_correction
             y_correction = correction(h, f, x, y, i, y_prediction)
             print(y_correction)
 
-            # print(f"{round(y_prediction, 6)}\t\t{round(y_correction, 6)}\t\t{round(abs(y_correction - y_prediction), 3)}\t\t{accuracy}")
         y.append(y_correction)
     # print("_____________________ MILAN END _____________________________")
     return y, x
